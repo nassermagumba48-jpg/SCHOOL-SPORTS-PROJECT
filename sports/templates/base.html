@@ -1,0 +1,180 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>School Sports | Dashboard</title>
+
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <!-- Fonts -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
+          media="print" onload="this.media='all'">
+
+    <!-- OverlayScrollbars -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="{% static 'css/adminlte.css' %}">
+
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</head>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+<div class="app-wrapper">
+
+    <!-- ================= HEADER ================= -->
+    <nav class="app-header navbar navbar-expand bg-body">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-lte-toggle="sidebar" href="#"><i class="bi bi-list"></i></a>
+                </li>
+                <li class="nav-item d-none d-md-block">
+                    <a href="{% url 'home_page' %}" class="nav-link">Home</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto">
+                <!-- Search -->
+                <li class="nav-item"><a class="nav-link" data-widget="navbar-search"><i class="bi bi-search"></i></a></li>
+
+                <!-- User Menu -->
+                <li class="nav-item dropdown user-menu">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <span class="d-none d-md-inline">Profile</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li class="user-footer">
+                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            <a href="{% url 'logout' %}" class="btn btn-default btn-flat float-end">Sign out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+        <div class="sidebar-brand">
+            <a href="{% url 'home_page' %}" class="brand-link">
+                <img src="{% static 'assets/img/AdminLTELogo.png' %}" class="brand-image shadow">
+                <span class="brand-text fw-light">School Sports</span>
+            </a>
+        </div>
+
+        <div class="sidebar-wrapper">
+            <nav>
+                <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview">
+
+                    <li class="nav-item">
+                        <a href="{% url 'add_tournament_page' %}" class="nav-link">
+                            <i class="bi bi-trophy"></i><p>Tournament</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'sports_page' %}" class="nav-link">
+                            <i class="bi bi-dribbble"></i><p>Sports</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'team_page' %}" class="nav-link">
+                            <i class="bi bi-people-fill"></i><p>Team</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'fixtures_page' %}" class="nav-link">
+                            <i class="nav-icon bi bi-clipboard-fill"></i><p>Fixtures</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'results_page' %}" class="nav-link">
+                            <i class="bi bi-clipboard-data"></i><p>Result</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'stats_page' %}" class="nav-link">
+                            <i class="nav-icon bi bi-pencil-square"></i><p>Stat</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="app-main">
+
+        <!-- ========== Django Messages ========== -->
+        {% if messages %}
+        <div class="container mt-4">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {% if message.tags == "success" %}
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                    {% elif message.tags == "error" %}
+                        <i class="bi bi-x-circle-fill me-2"></i>
+                    {% elif message.tags == "warning" %}
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    {% else %}
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                    {% endif %}
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- ====================================== -->
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="app-footer">
+        <div class="float-end d-none d-sm-inline">Anything you want</div>
+        <strong>&copy; 2014-2025 <a href="#">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+</div>
+
+<!-- ================= SCRIPTS ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"></script>
+<script src="{% static 'js/adminlte.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        flatpickr(".flatpickr", {
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "F j, Y",
+            allowInput: true,
+        });
+    });
+</script>
+
+</body>
+</html>

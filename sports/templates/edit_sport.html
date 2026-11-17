@@ -1,0 +1,14 @@
+{% extends "./base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2>Edit-{{sport.sport_name}}</h2>
+    <div class="container_fluid">
+        <form method='POST'>
+        {% csrf_token %}
+        {{form|crispy}}
+
+        <input type="submit" class="btn btn-success ">
+        <a href="{% url 'sports_page' %}" class="btn btn-danger mt-2">Cancel</a>
+    </div>
+
+{% endblock content%}
